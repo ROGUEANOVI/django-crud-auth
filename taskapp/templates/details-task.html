@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+  <main class="container mt-5">
+    
+    <div class="row ">
+      <div class="col-md-6 offset-md-3 text-center">
+
+        <h1>Task Details</h1>
+  
+        <div class="mb-3">
+          <p><strong>Title: </strong>{{task.title}}</p>
+        </div>
+          
+        <div class="mb-3">
+          <p><strong>By: </strong>
+          {{task.user.username}}</p>
+        </div>
+        
+        <div class="mb-3">
+          <p><strong>Description: </strong> {{task.description}}</p>
+        </div>
+
+        <div class="mb-3">
+          <p><strong>Created: </strong> {{task.created}}</p>
+        </div>
+
+        
+        <div class="mb-3">
+          <p><strong>Date completed: </strong> {{task.datecompleted}}</p>
+        </div>
+
+        {% if task.important %} 
+          <div class="mb-3">
+            <p><strong>Task Important</strong></p>
+          </div>
+        {% endif %}
+        
+
+        {% if not task.datecompleted %} 
+        <form action="{% url 'complete_task' task.id %}" method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+            <button class="btn btn-secondary">
+              Complete Task
+            </button>
+          </div>
+        </form>
+        {% endif %}
+      
+        <form action="{% url 'delete_task' task.id %}" method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+            <button class="btn btn-dark">
+              Delete
+            </button>
+          </div>
+          
+        </form>        
+
+      </div>
+    </div>
+    
+  </main>
+    
+  {% endblock %}

@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+  <main class="container mt-5">
+    <section class="card card-body">
+      <div class="row">
+        <div class="col-md-8 offset-md-2 text-center">
+          
+          <h1>List Task</h1>
+      
+          {% for task in tasks %}
+          <div class="card card-body mb-3">
+
+            <div class="mb-3">
+              <strong>{{task.title}} </strong> 
+            </div>
+
+            <div class="mb-3">
+              By: {{task.user.username}} 
+            </div>
+
+            <div class="mb-3">
+              <a href="/tasks/details-task/{{task.id}}"><button class="btn btn-secondary"> Details </button></a> 
+
+              <a href="/tasks/edit/{{task.id}}"> <button class="btn btn-dark"> Edit </button></a> 
+            </div> 
+            
+          </div>
+              
+          {% endfor %}
+  
+        </div>
+      </div>
+    </section>
+    
+  </main>
+
+  {% endblock %}
